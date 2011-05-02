@@ -1,0 +1,297 @@
+
+%\documentclass{sig-alternate}
+
+% English flaws:
+% "can be made ON ..." and not "can be made upon"
+% "disadvantage OF disruptING" and not " disadvantage to disrupt"
+% "requesting something" and not "requesting for something"
+
+
+%\documentclass[runningheads]{llncs}
+
+%\documentclass[times, 10pt,twocolumn]{article} 
+%\documentclass[preprint,10pt]{sigplanconf}
+
+\documentclass[runningheads]{llncs}
+%\documentclass{sig-alternate}
+
+
+%\usepackage{latex8}
+%\usepackage{times}
+
+%\documentstyle{llncs}
+%\documentclass[preprint,10pt]{sigplanconf}
+% constants
+\newcommand{\Title}{MrHolmes: Beyond Classical Continuous Integration}
+\newcommand{\TitleShort}{\Title}
+\newcommand{\Authors}{Ivan Rojas~~~~~Alexandre Bergel}
+\newcommand{\AuthorsShort}{I. Rojas, A. Bergel}
+
+
+
+\usepackage{xspace}
+\usepackage{ifthen}
+\usepackage{amsbsy}
+\usepackage{amssymb}
+\usepackage{balance}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{needspace}
+\usepackage{microtype}
+\usepackage{bold-extra}
+
+% references
+\usepackage[colorlinks]{hyperref}
+\usepackage[all]{hypcap}
+\setcounter{tocdepth}{2}
+\hypersetup{
+	colorlinks=true,
+	urlcolor=black,
+	linkcolor=black,
+	citecolor=black,
+	plainpages=false,
+	bookmarksopen=true,
+	pdfauthor={\Authors},
+	pdftitle={\Title}}
+
+%
+%\usepackage{amssymb}
+%\usepackage{graphicx}
+%%\usepackage{amsthm}
+%\usepackage{ifthen}
+%\usepackage{xspace}
+%\usepackage{alltt}
+%%\usepackage{psfig} 
+%\usepackage{latexsym}
+%\usepackage[latin1]{inputenc}
+%%\usepackage{psfig}
+%\usepackage{url}            
+%%\usepackage{amssymb}
+%%\usepackage{amsfonts}
+%%\usepackage{amsmath}
+%\usepackage{stmaryrd}
+%\usepackage{enumerate}
+%\usepackage{cite}
+%\usepackage[pdftex,colorlinks=true,pdfstartview=FitV,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+%\usepackage{xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\myhref}[1]{\href{http://#1}{#1}}
+
+%%%%%%%%%%%%%%%%%%%
+% Please remove this for the camera ready
+%%%%%%%%%%%%%%%%%%%
+\pagenumbering{arabic}
+\pagestyle{plain}
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%:Generic Macros
+\newboolean{showcomments}
+\setboolean{showcomments}{false}
+\ifthenelse{\boolean{showcomments}}
+  {\newcommand{\bnote}[2]{
+	\fbox{\bfseries\sffamily\scriptsize#1}
+    {\sf\small$>$\textit{#2}$<$}
+    % \marginpar{\fbox{\bfseries\sffamily#1}}
+   }
+   \newcommand{\cvsversion}{\emph{\scriptsize$-$Id: macros.tex,v 1.1.1.1 2007/02/28 13:43:36 bergel Exp $-$}}
+  }
+  {\newcommand{\bnote}[2]{}
+   \newcommand{\cvsversion}{}
+  } 
+
+\newcommand{\etal}{\emph{et al.}\xspace}
+\newcommand{\here}{\mynote{***}{CONTINUE HERE}}
+\newcommand\nb[1]{\mynote{NB}{#1}}
+\newcommand\fix[1]{\mynote{FIX}{#1}}
+\newcommand\ab[1]{\bnote{Alex}{#1}}
+\newcommand\rr[1]{\bnote{Romain}{#1}}
+\newcommand\tk[1]{\bnote{Tobias}{#1}}
+\newcommand\fb[1]{\bnote{Felipe}{#1}}
+\newcommand\lr[1]{\bnote{Lukas}{#1}}
+\newcommand\ml[1]{\bnote{Mircea}{#1}}
+
+
+\newcommand{\sep}{\texttt{>>}\xspace}
+
+\newcommand{\stBar}{$\mid$}
+\newcommand{\ret}{\^{}}
+\newcommand{\myparagraph}[1]{\noindent\textbf{#1.}}
+\newcommand{\eg}{e.g.,\xspace}
+\newcommand{\ie}{i.e.,\xspace}
+\newcommand{\co}[1]{{\small\textsf{#1}\xspace}}
+\newcommand{\secref}[1]{Section \ref{sec:#1}}
+\newcommand{\seclabel}[1]{\label{sec:#1}}
+\newenvironment{tcode}
+    {\footnotesize\sf\begin{tabbing} xx\=xxxxxx\=xxxxxx\=xxxxxx\=xxxxxx\=xxxxxx\=xxxxxx\=xxxxxx\=xxxxxx\=xxxxxx\=xxxxxx\=xxxxxx\=xxxxxx\=\kill}
+%xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill}
+    {\end{tabbing}\sf\normalsize}
+
+\newcommand{\figref}[1]{Figure~\ref{fig:#1}}
+\newcommand{\figlabel}[1]{\label{fig:#1}}
+\newcommand{\tablabel}[1]{\label{tab:#1}}
+\newcommand{\tabref}[1]{Table~\ref{tab:#1}}
+
+\usepackage[normalem]{ulem} % for \sout
+\usepackage{xcolor}
+\usepackage{color}
+\newcommand{\ra}{$\rightarrow$}
+\newcommand{\ugh}[1]{\textcolor{red}{\uwave{#1}}} % please rephrase
+\newcommand{\ins}[1]{\textcolor{blue}{\uline{#1}}} % please insert
+\newcommand{\del}[1]{\textcolor{red}{\sout{#1}}} % please delete
+\newcommand{\chg}[2]{\textcolor{red}{\sout{#1}}{\ra}\textcolor{blue}{\uline{#2}}} % please change
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%:Specialized macros
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+%SPRINGER
+%\title{Reconciling Static Type Declaration and Dynamic Scripting Languages}
+%\author{Alexandre Bergel}
+%\authorrunning{A. Bergel}
+%\institute{ADAM Project, INRIA Futurs, Lille, France\\
+%\co{\href{http://www.bergel.eu}{www.bergel.eu}}\\
+%}
+
+%ACM
+%\conferenceinfo{ECOOP}{'11}
+
+\title{\Title}
+\titlerunning{\Title}
+
+%\author{Alexandre Bergel\\
+%Pleiad Lab, Department of Computer Science (DCC),\\ University of Chile, Santiago, Chile\\ [1 ex]
+%\href{http://bergel.eu}{http://bergel.eu}
+%}
+
+\author{\Authors}
+\authorrunning{\AuthorsShort}
+
+\institute{PLEIAD Lab, Department of Computer Science (DCC), \\University of Chile, Santiago, Chile\\
+\url{ivanrohe@gmail.com}~~~~
+\url{http://bergel.eu}
+}
+
+
+\newcommand{\spp}{~~~~~~~}
+
+\maketitle
+
+%\cvsversion
+
+%\begin{center}
+%\textbf{Accepted at ECOOP'11 - Do not distribute, this is not the final version}
+%\end{center}
+
+\begin{abstract}
+% What is the problem
+
+
+% Why is the problem a problem?
+% What's the surprising Idea?
+% What's the consequence?
+\end{abstract}
+
+%\category{D.3.3}{Programming Languages}{Language Constructs and Features}
+%\category{D.1.5}{Programming Languages}{Object-oriented Programming}
+%\terms{Language, Design}
+%\keywords{Multi-language system, interoperability, SmalltalkLite, JavaLite, dynamic languages}
+
+
+%\begin{figure}[!]
+%\begin{center}
+%\includegraphics[scale=0.68]{figures/controlleddisruption}
+%\caption{The method \co{senseAndSend} is cut down into small pieces, called fragments.} \figlabel{controlleddisruption}
+%\end{center}
+%\end{figure}
+
+%:%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\emph{Note for the proceeding reader: this paper makes use of colors. Although not mandatory for its understanding, an online (colored) version of this paper will ease the reading.}
+
+\section{Introduction} \seclabel{introduction}
+
+% What is the problem
+Exercising a continuous process of quality control has recently become a popular trend in many software engineering teams, both in open-source and in industry. 
+
+% Why is the problem a problem?
+% What's the surprising Idea?
+% What's the consequence?
+
+%:%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Continuous Integration} \seclabel{problem}
+
+\paragraph{Continuous integration.} The process related to a continuous quality control and monitoring is commonly referred as \emph{continuous integration}. 
+
+\paragraph{Limitations.} 
+
+\begin{itemize}
+\item closed history model: new metrics cannot be easily added
+\item global metric application: the history model is the same for all the projects
+\end{itemize}
+
+%:%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{MrHolmes} \seclabel{klotz}
+
+%=======
+\subsection{MrHolmes in a nutshell} \seclabel{nutshell}
+
+%=======
+\subsection{Adding new metrics}
+
+%=======
+\subsection{Adding new rendering}
+
+%=======
+\subsection{Metamodel} \seclabel{metamodel}
+
+
+%:%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Applications} \seclabel{applications}
+
+%=======
+\subsection{Performance monitoring}
+
+%=======
+\subsection{...}
+
+
+%:%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Implementation} \seclabel{implementation}
+
+\paragraph{Seaside front-end}
+
+\paragraph{Cron}
+
+\paragraph{Managing errors}
+
+%:%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Related Work} \seclabel{relatedwork}
+
+\paragraph{Hudson}
+
+\paragraph{Jenkins}
+
+%:%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion} \seclabel{conclusion}
+
+
+
+%{\small 
+%\paragraph{Acknowledgment.} We thank Mircea Lungu, Oscar Nierstrasz, Lukas Renggli and Romain Robbes for the multiple discussions we had and their comments on an early draft of the paper.
+%We particular thank Walter Binder for his multiple discussions and advices.
+%Our thanks also go to Eliot Miranda for his help on porting \compteur to Cog, the jitted virtual machine of Pharo. 
+%We thank Gilad Bracha and Jan Vran\'{y} for the fruitful discussions we had.
+%We also thank Andrew P. Black for his precious help on improving the paper.
+%We gratefully thank Mar\'ia Jos\'e Cires for her help on the statistical part. 
+%We also thank ESUG, the European Smalltalk User Group, for its financial contribution to the presentation of this paper. 
+%}
+%
+
+\bibliographystyle{plain}
+\bibliography{scg}
+
+
+\end{document}
