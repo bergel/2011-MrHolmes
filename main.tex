@@ -238,11 +238,46 @@ Exercising a continuous process of quality control has recently become a popular
 %=======
 \subsection{MrHolmes in a nutshell} \seclabel{nutshell}
 
+MrHolmes is a test server created by de University of Chile.
+
+Its main function is to test different projects built with smalltalk (Pharo, Seaside, among others).
+
+Also, It shows information about tested project, like number of lines, clases or another measure, and others that are specific for the project.
+
 %=======
 \subsection{Adding new metrics}
 
+If to want to add a new project, you have to put the project name, but the project must have 
+the the following characteristics.
+
+\begin{itemize}
+\item To be a squeaksource project. 
+\item To have a configuration package.
+\end{itemize}
+
 %=======
 \subsection{Adding new rendering}
+
+Each project in MrHolmes contents a list of result for each day. That result is represented by a sign and it meaning the project state.
+
+The signs are:
+
+Icon glossary of project results
+\begin{itemize}
+\item The result was successful, and does not have any error or warning test.
+\item The result has warning tests, but does not have any error test.
+\item The result has error tests.
+\item The project execution has failed, because a error has ocurred during the loading of project configuration.
+\end{itemize}
+
+Each result shows the following datas:
+\begin{itemize}
+\item Successful tests.
+\item Warning tests.
+\item Error tests.
+\item Benchmarks (aditional information and it depends of the project).
+\item Error loading (It will show the error description if a error happen during the project load).
+\end{itemize}
 
 %=======
 \subsection{Metamodel} \seclabel{metamodel}
